@@ -30,7 +30,7 @@ public class Avaliacao {
     private Topico topico;
 
     @Column(nullable = false)
-    private Float nota;
+    private int nota;
 
     @Column(columnDefinition = "TEXT")
     private String observacoes;
@@ -43,7 +43,7 @@ public class Avaliacao {
         createdAt = LocalDateTime.now();
     }
 
-    public Avaliacao(Entrevistas entrevista, Candidato candidato, Topico topico, Float nota) {
+    public Avaliacao(Entrevistas entrevista, Candidato candidato, Topico topico, int nota) {
         this.entrevista = entrevista;
         this.candidato = candidato;
         this.topico = topico;

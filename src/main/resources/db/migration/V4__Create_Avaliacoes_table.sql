@@ -1,16 +1,12 @@
-<<<<<<< HEAD
-
 CREATE TABLE avaliacoes (
-                            id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-=======
-CREATE TABLE avaliacoes (
-                            id BIGINT AUTO_INCREMENT PRIMARY KEY,
->>>>>>> origin/main
-                            entrevista_id BIGINT NOT NULL,
-                            candidatos_id BIGINT NOT NULL,
-                            nota FLOAT NOT NULL,
-                            observacoes TEXT,
+                            id BIGINT PRIMARY KEY,
+                            candidato_id BIGINT,
+                            nota INTEGER NOT NULL CHECK (nota >= 0 AND nota <= 10),
+                            comentario TEXT,
                             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                            FOREIGN KEY (entrevista_id) REFERENCES entrevistas(id),
-                            FOREIGN KEY (candidatos_id) REFERENCES candidatos(id)
+
+                            CONSTRAINT fk_avaliacao_candidato
+                                FOREIGN KEY (candidato_id)
+                                    REFERENCES candidato(id)
+                                    ON DELETE CASCADE
 );
