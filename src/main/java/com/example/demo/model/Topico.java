@@ -15,7 +15,8 @@ import java.util.List;
 public class Topico {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "topico_seq")
+    @SequenceGenerator(name = "topico_seq", sequenceName = "topico_id_seq", allocationSize = 1)
     private Long id;
 
     @Column(nullable = false, length = 255)

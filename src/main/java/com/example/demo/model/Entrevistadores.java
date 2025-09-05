@@ -15,7 +15,8 @@ import java.util.List;
 public class Entrevistadores {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "entrevistadores_seq")
+    @SequenceGenerator(name = "entrevistadores_seq", sequenceName = "entrevistadores_id_seq", allocationSize = 1)
     private Long id;
 
     @Column(nullable = false, length = 255)

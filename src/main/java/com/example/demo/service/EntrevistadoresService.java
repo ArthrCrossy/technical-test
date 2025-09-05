@@ -25,4 +25,20 @@ public class EntrevistadoresService {
         return entrevistadoresRepository.findById(id);
     }
 
+    @Transactional()
+    public Entrevistadores save(Entrevistadores entrevistador) {
+        return entrevistadoresRepository.save(entrevistador);
+    }
+
+    @Transactional()
+    public void deleteById(Long id) {
+        entrevistadoresRepository.deleteById(id);
+    }
+
+    @Transactional()
+    public List<Entrevistadores> findByNomeContaining(String entrevistador){
+        return entrevistadoresRepository.buscarPorNomeOuEmail(entrevistador);
+    }
+
+
 }

@@ -16,7 +16,8 @@ import java.util.List;
 public class Entrevistas {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "entrevistas_seq")
+    @SequenceGenerator(name = "entrevistas_seq", sequenceName = "entrevistas_id_seq", allocationSize = 1)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)

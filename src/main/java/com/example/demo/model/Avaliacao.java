@@ -14,7 +14,8 @@ import java.time.LocalDateTime;
 public class Avaliacao {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "avaliacao_seq")
+    @SequenceGenerator(name = "avaliacao_seq", sequenceName = "avaliacao_id_seq", allocationSize = 1)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -1,3 +1,4 @@
+
 package com.example.demo.controller;
 
 import com.example.demo.model.Entrevistadores;
@@ -38,4 +39,57 @@ public class EntrevistadoresController {
         }
     }
 
+    @PostMapping
+    public ResponseEntity<Entrevistadores> createEntrevistador(@RequestBody Entrevistadores entrevistador) {
+        try {
+            Entrevistadores novoEntrevistador = entrevistadoresService.save(entrevistador);
+            return new ResponseEntity<>(novoEntrevistador, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Entrevistadores> updateEntrevistador(@PathVariable Long id, @RequestBody Entrevistadores entrevistador) {
+        try {
+            Optional<Entrevistadores> entrevistadorExistente = entrevistadoresService.findById(id);
+            if (entrevistadorExistente.isPresent()) {
+                entrevistador.setId(id);
+                Entrevistadores entrevistadorAtualizado = entrevistadoresService.save(entrevistador);
+                return new ResponseEntity<>(entrevistadorAtualizado, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<HttpStatus> deleteEntrevistador(@PathVariable Long id) {
+        try {
+            Optional<Entrevistadores> entrevistador = entrevistadoresService.findById(id);
+            if (entrevistador.isPresent()) {
+                entrevistadoresService.deleteById(id);
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/buscar")
+    public ResponseEntity<List<Entrevistadores>> buscarPorNome(@RequestParam String nome) {
+        try {
+            List<Entrevistadores> entrevistadores = entrevistadoresService.findByNomeContaining(nome);
+            if (entrevistadores.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+            return new ResponseEntity<>(entrevistadores, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
