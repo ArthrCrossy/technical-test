@@ -75,6 +75,9 @@ public class EntrevistasController {
 
     @PostMapping
     public ResponseEntity<Entrevistas> criar(@RequestBody Entrevistas entrevista) {
+
+        System.out.println("oi");
+
         try {
             // Validar se candidato e entrevistador existem
             if (!candidatoRepository.existsById(entrevista.getCandidato().getId())) {
