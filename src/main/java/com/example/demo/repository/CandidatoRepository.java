@@ -15,4 +15,5 @@ import java.util.Optional;
 public interface CandidatoRepository extends JpaRepository<Candidato, Long> {
 
 
+    Candidato findByNome(String nome);
 }

@@ -52,7 +52,7 @@ public class Entrevistas {
         }
     }
 
-    public Entrevistas(Candidato candidato, Entrevistadores entrevistador, LocalDateTime dataEntrevista) {
+    public Entrevistas(int candidato_id, int entrevistador_id, LocalDateTime dataEntrevista) {
         this.candidato = candidato;
         this.entrevistador = entrevistador;
         this.dataEntrevista = dataEntrevista;
